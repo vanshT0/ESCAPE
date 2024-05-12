@@ -93,5 +93,34 @@ public class LinkedList {
         return temp.data;
     }
 
+    public void addFirst(int value){
+
+        Node temp = new Node();
+        temp.data = value;
+        temp.next = head;
+        head = temp;
+        if(size == 0){
+            tail = temp;
+        }
+
+       size++;
+
+    }
+
+    public void addAtIndex(int value, int idx){
+        Node temp = new Node();
+        temp.data = value;
+        int count = 0;
+        Node temp1 = head;
+
+        while(temp1.next != null && temp1!= null){
+            if(count == idx - 1){
+                temp1.next = temp.next;
+            }
+            temp1 = temp1.next;
+            count++;
+        }
+    }
+
 
 }
