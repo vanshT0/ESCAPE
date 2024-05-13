@@ -31,4 +31,23 @@ public class DigitCount {
 
         return arr;
     }
+
+    // LC 448
+        public List<Integer> findDisappearedNumbers(int[] nums) {
+        int max = 0;
+        int[] freq = new int[nums.length + 1];
+
+        for(int i : nums){
+            if( i > max) max = i;
+            freq[i]++;
+        }
+        List<Integer> ll = new ArrayList();
+        for(int i = 1; i <= nums.length; i++){
+            if(freq[i] == 0){
+                ll.add(i);
+            }
+        }
+
+        return ll;
+    }
 }
