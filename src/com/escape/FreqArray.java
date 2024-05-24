@@ -42,6 +42,79 @@ public class FreqArray{
 
 }
 
+
+class Solution {
+    public int[] avoidFlood(int[] rains) {
+        // Map<Integer, Integer> map = new HashMap();
+        int[] arr = new int[rains.length];
+
+        Stack<Integer> stack = new Stack();
+        Set<Integer> set = new HashSet();
+
+        int j = 0;
+        int cz = 0;
+        int cnz = 0;
+
+        for (int i = 0; i < rains.length; i++) {
+            if (rains[i] == 0) {
+                cz++;
+                if (cz > cnz) {
+                    int val2 = stackVal(i,rains,set);
+                    if (val2 != -5) {
+                        arr[j] = val2;
+                        set.remove(val2);
+                        j++;
+                    }
+                    else{arr[j] = 1;
+                    j++;
+                    }
+                } else {
+                    int val = stack.peek();
+                    if (i < rains.length - 1) {
+                        int val2 = stackVal(i,rains,set);
+                        if (val2 != -5) {
+                            //  System.out.println("Val2 is" + val2 + "for i " + i);
+                            arr[j] = val2;
+                            j++;
+                            set.remove(val2);
+                        } else {
+                            // System.out.println("Val3 is" + val2 + "for i " + i);
+                            arr[j] = val;
+                            j++;
+                            set.remove(val);
+                            stack.pop();
+                        }
+                    }else{
+                        arr[j] = 1;
+                    }
+
+                }
+            } else {
+                cnz++;
+                if (!set.contains(rains[i])) {
+                    stack.push(rains[i]);
+                    set.add(rains[i]);
+                    arr[j] = -1;
+                    j++;
+                } else {
+                    //  System.out.println(i);
+                    return new int[0];
+                }
+
+            }
+        }
+
+        return arr;
+    }
+
+    public int stackVal(int i, int[] arr, Set<Integer> set){
+        for(int x = i + 1; x < arr.length; x++){
+            if(set.contains(arr[x])) return arr[x];
+        }
+
+         return -5;
+    }
+}
 // }
 
 
