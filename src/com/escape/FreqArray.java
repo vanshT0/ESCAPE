@@ -115,6 +115,39 @@ class Solution {
          return -5;
     }
 }
+
+    public int longestPalindrome(String s) {
+        char[] sarr = s.toCharArray();
+        int[] freq = new int[123];
+        for(int i = 0; i < sarr.length; i++) {
+            freq[(int) sarr[i]]++;
+        }
+
+        int pairCount = 0;
+
+        for(int i = 65; i < 91; i++) {
+            while(freq[i] > 1) {
+                freq[i] -= 2;
+                pairCount++;
+            }
+        }
+
+        for(int i = 97; i < 123; i++) {
+            while(freq[i] > 1) {
+                freq[i] -= 2;
+                pairCount++;
+            }
+        }
+
+
+        pairCount = pairCount * 2;
+        if(pairCount != sarr.length) {
+            return pairCount + 1;
+        } else {
+            return pairCount;
+        }
+    
+}
 // }
 
 
